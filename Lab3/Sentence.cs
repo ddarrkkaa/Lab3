@@ -2,74 +2,72 @@ namespace Lab3
 {
     public class Sentence
     {
-        public void AddWord(List<string> sentence, string word)
+        public List<string> FirstS = new List<string>(); 
+        public void AddWord( string word)
         {
-            sentence.Add(word);
-            foreach (string element in sentence) 
-            {
-                Console.WriteLine(element);
-            }
+            FirstS.Add(word);
         }
-        public void DeleteWord(List<string> sentence, int numb)
+        public void DeleteWord( int numb)
         {
-            sentence.RemoveAt(numb);
-            foreach (string element in sentence) 
-            {
-                Console.WriteLine(element);
-            }
+            FirstS.RemoveAt(numb);
         }
-        public void InsertWord(List<string> sentence,int numb, string word)
+        public void InsertWord(int numb, string word)
         {
-            sentence.Insert(numb,word);
-            foreach (string element in sentence) 
-            {
-                Console.WriteLine(element);
-            }                                                        
+            FirstS.Insert(numb,word);
         }
 
-        public void CountOfLetters(List<string> sentence)
+        public void CountOfLetters()
         {
-            List<char> charList = sentence.SelectMany(str => str.ToCharArray()).ToList();
-            Console.WriteLine($"The count of lrtters is: {charList.Count()}");
+            List<char> charList = FirstS.SelectMany(str => str.ToCharArray()).ToList();
+            Console.WriteLine($"The count of letters is: {charList.Count()}");
         }
-        public void CountOfWords(List<string> sentence)
+        public void CountOfWords()
         {
-            Console.WriteLine($"The count of words is: {sentence.Count()}");
+            Console.WriteLine($"The count of words is: {FirstS.Count()}");
         }
 
-        public void TheLongest(List<string> sentence)
+        public void TheLongest()
         {
-            string longestWord = sentence.OrderByDescending(s => s.Length).FirstOrDefault();
+            string longestWord = FirstS.OrderByDescending(s => s.Length).FirstOrDefault();
             Console.WriteLine($"The longest word is: {longestWord}");
         }
-        public void TheShortest(List<string> sentence)
+        public void TheShortest()
         {
-            string shortestWord = sentence.OrderByDescending(s => s.Length).LastOrDefault();
+            string shortestWord = FirstS.OrderByDescending(s => s.Length).LastOrDefault();
             Console.WriteLine($"The shortest word is: {shortestWord}");
         }
 
-        public void ExistTheWord(List<string> sentence, string word)
+        public void ExistTheWord( string word)
         {
-            bool exist = sentence.Contains(word);
+            bool exist = FirstS.Contains(word);
             if (exist==true)
                 Console.WriteLine("This word is in the sentence");
             else
                 Console.WriteLine("This word is not in the sentence");
         }
 
-        public void FindNumb(List<string> sentence, int numb)
+        public void FindNumb(int numb)
         {
             int numb2 = numb-1;
-            Console.WriteLine($"The word {numb} is {sentence[numb2]}");
+            Console.WriteLine($"The word {numb} is {FirstS[numb2]}");
         }
 
-        public void Equal(List<string> sentence, List<string> sentence2)
+        public void Equal(List<string> SecondS)
         {
             //bool eq = false;
-            if(sentence.Count()==sentence2.Count())
+            if(FirstS.Count()==SecondS.Count())
                 Console.WriteLine("the sentences are equal");
             else
                 Console.WriteLine("the sentences aren`t equal");
+        }
+
+        public void Show()
+        {
+            foreach (var VARIABLE in FirstS)
+            {
+                Console.Write(VARIABLE+" ");
+            }
+            Console.WriteLine();
         }
     }
 }

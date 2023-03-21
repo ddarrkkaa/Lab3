@@ -1,53 +1,74 @@
-﻿namespace Lab3
+﻿using Newtonsoft.Json;
+namespace Lab3
 {
     public class Lab3
     {
+        public static void Met1(Sentence sentence)
+        {
+            string result = JsonConvert.SerializeObject(sentence, Formatting.Indented);
+            string filePath2 = @"C:\кпи\ОП\Lab3.json";
+            File.WriteAllText(filePath2, result);
+        }
+
+        public static Sentence Met2()
+        {
+            string filePath2 = @"C:\кпи\ОП\Lab3.json";
+            var result = JsonConvert.DeserializeObject<Sentence>(File.ReadAllText(filePath2));
+            return result;
+        }
         static void Main()
         {
             Console.WriteLine("Enter the sentence: ");
-            List<string> Sentence1 = new List<string>(); 
             string sent = Console.ReadLine();
-            Sentence1 = sent. Split(' ').ToList();
+            var FirstS = sent.Split(' ').ToList();
 
-            Sentence sentence = new Sentence();
+            Sentence line = new Sentence();
+            foreach (var VARIABLE in FirstS)
+            {
+                line.AddWord(VARIABLE);
+            }
+            line.Show();
             
             Console.WriteLine("Enter the word you`d like to add: "); 
             string word1 = Console.ReadLine();
-            sentence.AddWord(Sentence1, word1);  
+            line.AddWord(word1);  
             
             Console.WriteLine("Enter the number of the word you`d like to delete: "); 
             int numb1 = Int32.Parse(Console.ReadLine());
             numb1 -= 1;
-            sentence.DeleteWord(Sentence1, numb1);
+            line.DeleteWord(numb1);
             
             Console.WriteLine("Enter the number of the word you`d like to insert: ");
             int numb2 = Int32.Parse(Console.ReadLine());
             numb2 -= 1;
             Console.WriteLine("Enter the word you`d like to insert: ");
             string word2 = Console.ReadLine();
-            sentence.InsertWord(Sentence1, numb2, word2); 
+            line.InsertWord(numb2, word2); 
 
-            sentence.CountOfLetters(Sentence1);
+            line.CountOfLetters();
             
-            sentence.CountOfWords(Sentence1);
+            line.CountOfWords();
             
-            sentence.TheLongest(Sentence1);
+            line.TheLongest();
             
-            sentence.TheShortest(Sentence1);
+            line.TheShortest();
             
             Console.WriteLine("Enter the word you`d like to check: "); 
             string word3 = Console.ReadLine();
-            sentence.ExistTheWord(Sentence1,word3);
+            line.ExistTheWord(word3);
             
             Console.WriteLine("Enter the number of the word you`d like to find: ");
             int numb4 = Int32.Parse(Console.ReadLine());
-            sentence.FindNumb(Sentence1,numb4);
+            line.FindNumb(numb4);
             
             Console.WriteLine("Enter second sentence: ");
-            List<string> Sentence2 = new List<string>(); 
+            List<string> SecondS = new List<string>(); 
             string sent2 = Console.ReadLine();
-            Sentence2 = sent2. Split(' ').ToList();
-            sentence.Equal(Sentence1,Sentence2);
+            SecondS = sent2. Split(' ').ToList();
+            line.Equal(SecondS);
+
+            Met1(line);
+            Met2();
         }
     }
 }
